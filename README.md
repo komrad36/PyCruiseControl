@@ -1,5 +1,4 @@
-PyCruiseControl
-Modified divorced PID controller applied to car cruise control and accompanying physics simulation and visualizations.
+PyCruiseControl is a modified divorced PID controller applied to car cruise control and accompanying physics simulation and visualizations.
 
 This controller demonstrates the principles of optimizing PID (or PI in this case - the derivative term
 is not necessary for this application) control for a real-world application and propagates the physics of hills
