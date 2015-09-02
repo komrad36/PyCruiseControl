@@ -109,7 +109,7 @@ KW_PER_W = 1e-3
 max_kw = veh.max_pwr * KW_PER_W
 plt.axhline(max_kw, color='r', label='Maximum Engine Power', linewidth=1.5)
 plt.plot(T, [elem * KW_PER_W for elem in pwr], color='b', linewidth=1.5)
-plt.ylim(0, 20 * ceil(max_kw / 20))
+plt.ylim(0, 20 * ceil(max_kw / 20) + 10)
 plt.legend(loc='best')
 
 plt.figure('PID Cruise Control - Velocities')
@@ -121,7 +121,7 @@ plt.ylabel('Speed [m/s]')
 plt.plot(T, set_points, color='r', label='Set Point')
 plt.plot(T, V, color='b', linewidth=2, label='Cruise Control')
 plt.plot(T_nopower, V_nopower, color='g', linewidth=2, label='Coasting')
-plt.ylim(0, 10 * ceil(max(V + set_points) / 10))
+plt.ylim(0, 10 * ceil(max(V + set_points) / 10) + 5)
 plt.legend(loc='best')
 
 plt.show()
