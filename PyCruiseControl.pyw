@@ -8,10 +8,13 @@
 # 8/30/2015
 # This program is entirely my own work.
 # *******************************************************************
-
+# 
 # Cruise Control is a PID controller (or PI - derivative
 # term not required for this application), along with the
 # required physics simulation (i.e. hills, drag) for demo purposes
+# 
+# This controller is optimized for normal car speeds, i.e. < 50 m/s.
+# Of course, the controller may perform suboptimally far above this.
 
 V_init = 13 # initial velocity [m/s]
 maximize_plots = True
