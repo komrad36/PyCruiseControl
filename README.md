@@ -11,3 +11,5 @@ The file PyCruiseControl.pyw is the run script; the other two are helper modules
 and the vehicle physics simulator.
 
 The only dependency is matplotlib for plotting support.
+
+Two screenshots in this directory illustrate example plots of a particular setpoint configuration.
