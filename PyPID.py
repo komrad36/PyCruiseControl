@@ -29,15 +29,15 @@ class PID:
         # massive under/overshoots due to slow engine response or
         # slow drag-only deceleration
         min_I = 0
-        max_I = 20
+        max_I = 45
             
         # Max rates of integral term accum. in both neg and pos
-        min_delta_I = -0.18
-        max_delta_I = 1.45
+        min_delta_I = -0.1
+        max_delta_I = 0.7
     
-        # Max power changes per dt [W]
-        min_delta_pwr = -28000
-        max_delta_pwr = 28000
+        # Max power changes [W/s]
+        min_delta_pwr = -80000
+        max_delta_pwr = 40000
 
         def __init__(this, K_P, K_I, K_D):
             this.K_P = K_P

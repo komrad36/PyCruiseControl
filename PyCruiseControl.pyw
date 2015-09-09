@@ -15,23 +15,29 @@
 # 
 # This controller is optimized for normal car speeds, i.e. < 50 m/s.
 # Of course, the controller may perform suboptimally far above this.
+#
+# Experiment with the parameters below, or perform advanced
+# experimentation or modification of the PID system in PyPID.
+#
+# Add 'hills' with the dh_dt function in PyVehicle.
 
-V_init = 13 # initial velocity [m/s]
+V_init = 25 # initial velocity [m/s]
 maximize_plots = True
 font_size = 24 # [pt]
 h_physics = 0.05 # physics time step [s]
-h_ref = 0.05 # reference (coasting) integrator time step [s]
+h_ref = 0.01 # reference (coasting) integrator time step [s]
 physics_ticks_per_control_tick = 4 # call PID every x physics ticks
 T_max = 200 # end time [s]
 
 # PID gains:
-K_P = 18000 # proportional gain
-K_I = 950   # integral gain
-K_D = 0     # derivative gain
+K_P = 22000  # proportional gain
+K_I = 2200   # integral gain
+K_D = 0      # derivative gain
 
 num_ticks = int(T_max / h_physics) + 1
 # ------adjust this array to configure setpoints as desired------
 #set_points = [V_init] * (num_ticks // 4) + [15] * (num_ticks // 7) + [29] * (num_ticks // 4)
+#set_points = []
 set_points = [V_init] * (num_ticks // 9) + [37] * (num_ticks // 6) + [34] * (num_ticks // 7) + [25] * (num_ticks // 3) + [10] * (num_ticks // 7)
 # remainder of array:
 if len(set_points) < num_ticks:
@@ -79,7 +85,8 @@ V_nopower = [V_init] + [None] * num_ref_ticks
 i = 0
 while T_nopower[i] < T_max:
     i += 1
-    V_nopower[i] = RK4(veh.dv_dt_nopower, T_nopower[i - 1], h_ref, V_nopower[i - 1])
+    # floor vel at just over 0 so we are not annoyed by massive slides down hills
+    V_nopower[i] = max(0.01, RK4(veh.dv_dt_nopower, T_nopower[i - 1], h_ref, V_nopower[i - 1]))
     T_nopower[i] = i * h_ref
 
 # propagate physics and control

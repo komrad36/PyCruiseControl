@@ -13,6 +13,8 @@
 # in the PID module. This modular design means the PID controller
 # is not dependent on the kind of vehicle, and vice versa.
 
+from math import sin
+
 class Vehicle:
         t = 0 # initial time [s]
         h = 0 # physics time step [s]
@@ -23,7 +25,7 @@ class Vehicle:
         max_pwr = 149000 # max allowed power @ wheels [kW]
         m = 1542 # [kg]
         g = 9.81 # [m/s^2]
-        A = 2 # [m^2]
+        A = 2.5 # [m^2]
         c_d = 0.34
         #c_d = 0.24 # it's a Tesla Model S...
         rho = 1.2041 # [kg/m^3]
@@ -33,9 +35,12 @@ class Vehicle:
             this.h = h
 
         # add hills here!
+        # dh/dt of 4 m/s corresponds to 11.5 degrees at 20 m/s, which is quite a lot for cruise control
         def dh_dt(this, t, v):
+            #return 2.5
+            #return -0.4
+            #return 0.3*sin(t/20) - 0.1
             return 0
-            #return 0.05*sin(t/5)
 
         # energy at time t is kinetic plus potential
         # energy loss is frictional (aerodrag)
